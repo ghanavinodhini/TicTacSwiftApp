@@ -59,6 +59,4 @@ class GameViewController: ViewController {
             board.append("")
         }
     }
-    
-
 }
