@@ -10,7 +10,10 @@ import UIKit
 class GameViewController: ViewController,UITextFieldDelegate {
     
     
+   // @IBOutlet var boxes: [UIButton]!
+    
     @IBOutlet var boxes: [UIButton]!
+    
     var board = [String]()
     var currentPlayer = ""
     var playerXScore = 0
@@ -46,10 +49,8 @@ class GameViewController: ViewController,UITextFieldDelegate {
     
     }
     
-   
-  
-    @IBAction func boxPressed(_ sender: UIButton)
-    {
+    @IBAction func boxPressed(_ sender: UIButton) {
+        
         if playerXTxtField.text == "" || playerOTxtField.text == ""
         {
             
@@ -81,6 +82,41 @@ class GameViewController: ViewController,UITextFieldDelegate {
         
     }
     }
+    
+  
+   /* @IBAction func boxPressed(_ sender: UIButton)
+    {
+        if playerXTxtField.text == "" || playerOTxtField.text == ""
+        {
+            
+            showToast(message: "Please enter Player Names")
+        }else{
+            
+        let index = boxes.firstIndex(of:sender)!
+      
+        
+        //to avoid allowing user to change symbol after one turn.
+        if !board[index].isEmpty
+        {
+            return
+        }
+        if currentPlayer == "X"
+        {
+            sender.setTitle("X", for: .normal)
+            currentPlayer = "O"
+            board[index] = "X"
+        }else
+        {
+            sender.setTitle("O", for: .normal)
+            currentPlayer = "X"
+            board[index] = "O"
+        }
+        
+         
+            winners()
+        
+    }
+    }*/
     
    func loadBoard(){
     //use '_' to use for loop without variables.
