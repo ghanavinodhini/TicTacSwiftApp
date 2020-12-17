@@ -32,6 +32,8 @@ class GameViewController: ViewController {
         super.viewDidLoad()
         scoreOLabel.text = "Score : \(playerOScore)"
         scoreXLabel.text = "Score : \(playerXScore)"
+        playerOTxtField.text = ""
+        playerOTxtField.text = ""
         loadBoard()
         
        // print(board)
@@ -42,7 +44,8 @@ class GameViewController: ViewController {
   
     @IBAction func boxPressed(_ sender: UIButton)
     {
-        if playerXTxtField.text == "" || playerOTxtField.text == ""{
+        if playerXTxtField.text == "" || playerOTxtField.text == ""
+        {
             
             showToast(message: "Please enter Player Names")
         }else{
@@ -103,13 +106,13 @@ class GameViewController: ViewController {
                     playerXScore += 1
                     print("player X score: \(playerXScore)")
                     scoreXLabel.text = "Score : \(playerXScore)"
-                    winMsg = "\(String(describing: playerXTxtField.text)) WON"
+                    winMsg = "\(playerXTxtField.text ?? "Player X") WON"
                 }
                 if winPlayer == "O"{
                     playerOScore += 1
                     print("player O score : \(playerOScore)")
                     scoreOLabel.text = "Score : \(playerOScore)"
-                    winMsg = "\(String(describing: playerOTxtField.text)) WON"
+                    winMsg = "\(playerOTxtField.text ?? "Player O") WON"
                 }
                // showAlert(msg:"Player WON: \(winPlayer)" )
                 showAlert(msg: winMsg)
