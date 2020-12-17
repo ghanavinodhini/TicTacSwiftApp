@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GameViewController: ViewController {
+class GameViewController: ViewController,UITextFieldDelegate {
     
     
     @IBOutlet var boxes: [UIButton]!
@@ -30,12 +30,18 @@ class GameViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       /* self.playerXTxtField.delegate = self
+        self.playerXTxtField.becomeFirstResponder()*/
         scoreOLabel.text = "Score : \(playerOScore)"
         scoreXLabel.text = "Score : \(playerXScore)"
         playerOTxtField.text = ""
         playerOTxtField.text = ""
         loadBoard()
+      
         
+        
+
        // print(board)
     
     }
@@ -134,6 +140,24 @@ class GameViewController: ViewController {
         let action = UIAlertAction(title: "OK", style: .default){_ in
             self.resetBoard()
         }
+        
+        //Adding trophy in alert
+        let imgTitle = UIImage(named:"trophy.png")
+        let imgViewTitle = UIImageView(frame: CGRect(x: 80, y: 70, width: 150, height: 150))
+        imgViewTitle.image = imgTitle
+        alert.view.addSubview(imgViewTitle)
+        
+        // height constraint
+           let constraintHeight = NSLayoutConstraint(
+              item: alert.view!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute:
+              NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 280)
+           alert.view.addConstraint(constraintHeight)
+
+           // width constraint
+           let constraintWidth = NSLayoutConstraint(
+              item: alert.view!, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute:
+              NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 300)
+           alert.view.addConstraint(constraintWidth)
         //print(alert.message = "Player WON : " + winPlayer)
         //alert.message = "Player WON : " + winPlayer
         alert.addAction(action)
@@ -168,4 +192,11 @@ class GameViewController: ViewController {
             toastLabel.removeFromSuperview()
         })
     }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //self.view.endEditing(true)
+        textField.resignFirstResponder()
+        return false
+        }
 }
