@@ -254,6 +254,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="playerOTxtField" destination="3r2-Jd-eN2" id="Qx6-dm-0sY"/>
+                        <outlet property="playerXTxtField" destination="l7P-A0-2TU" id="utZ-QA-dSI"/>
                         <outlet property="scoreOLabel" destination="lWy-ZQ-bJb" id="C2m-s9-4fH"/>
                         <outlet property="scoreXLabel" destination="KgF-Yd-gxu" id="czN-Im-uMr"/>
                         <outletCollection property="boxes" destination="f7s-d3-osJ" collectionClass="NSMutableArray" id="qqY-x7-16n"/>

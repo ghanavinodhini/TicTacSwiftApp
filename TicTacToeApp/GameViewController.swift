@@ -17,6 +17,8 @@ class GameViewController: ViewController {
     var playerOScore = 0
     var winPlayer = ""
     
+    @IBOutlet weak var playerOTxtField: UITextField!
+    @IBOutlet weak var playerXTxtField: UITextField!
     @IBOutlet weak var scoreOLabel: UILabel!
     @IBOutlet weak var scoreXLabel: UILabel!
     
@@ -31,13 +33,20 @@ class GameViewController: ViewController {
         scoreOLabel.text = "Score : \(playerOScore)"
         scoreXLabel.text = "Score : \(playerXScore)"
         loadBoard()
+        
        // print(board)
     
     }
     
+   
   
     @IBAction func boxPressed(_ sender: UIButton)
     {
+        if playerXTxtField.text == "" || playerOTxtField.text == ""{
+            
+            showToast(message: "Please enter Player Names")
+        }else{
+            
         let index = boxes.firstIndex(of:sender)!
       
         
@@ -57,9 +66,11 @@ class GameViewController: ViewController {
             currentPlayer = "X"
             board[index] = "O"
         }
+        
          
             winners()
         
+    }
     }
     
    func loadBoard(){
@@ -73,6 +84,7 @@ class GameViewController: ViewController {
     
     func winners()
     {
+        var winMsg = ""
         for rule in winRules
         {
             //print(rule)
@@ -91,13 +103,16 @@ class GameViewController: ViewController {
                     playerXScore += 1
                     print("player X score: \(playerXScore)")
                     scoreXLabel.text = "Score : \(playerXScore)"
+                    winMsg = "\(String(describing: playerXTxtField.text)) WON"
                 }
                 if winPlayer == "O"{
                     playerOScore += 1
                     print("player O score : \(playerOScore)")
                     scoreOLabel.text = "Score : \(playerOScore)"
+                    winMsg = "\(String(describing: playerOTxtField.text)) WON"
                 }
-                showAlert(msg:"Player WON: \(winPlayer)" )
+               // showAlert(msg:"Player WON: \(winPlayer)" )
+                showAlert(msg: winMsg)
                 return
                 
             }
@@ -129,5 +144,25 @@ class GameViewController: ViewController {
         for button in boxes{
             button.setTitle(nil, for: .normal)
         }
+    }
+    
+    func showToast(message : String)
+    {
+
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 175, y: self.view.frame.size.height-100, width: 350, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.textAlignment = .center;
+        toastLabel.font = UIFont(name: "Montserrat-Light", size: 12.0)
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
     }
 }
