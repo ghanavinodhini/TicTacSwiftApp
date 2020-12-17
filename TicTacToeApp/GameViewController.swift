@@ -17,6 +17,9 @@ class GameViewController: ViewController {
     var playerOScore = 0
     var winPlayer = ""
     
+    @IBOutlet weak var scoreOLabel: UILabel!
+    @IBOutlet weak var scoreXLabel: UILabel!
+    
     //2D array of array of subarrays
     var winRules = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
     
@@ -25,6 +28,8 @@ class GameViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        scoreOLabel.text = "Score : \(playerOScore)"
+        scoreXLabel.text = "Score : \(playerXScore)"
         loadBoard()
        // print(board)
     
@@ -82,20 +87,37 @@ class GameViewController: ViewController {
             {
                print("Winner inside winners function is: \(playerAt0)")
                 winPlayer = playerAt0
-                showAlert()
+                if winPlayer == "X"{
+                    playerXScore += 1
+                    print("player X score: \(playerXScore)")
+                    scoreXLabel.text = "Score : \(playerXScore)"
+                }
+                if winPlayer == "O"{
+                    playerOScore += 1
+                    print("player O score : \(playerOScore)")
+                    scoreOLabel.text = "Score : \(playerOScore)"
+                }
+                showAlert(msg:"Player WON: \(winPlayer)" )
+                return
                 
             }
+        }
+        
+        //Display Game Draw if no wins
+        if !board.contains("")
+        {
+            showAlert(msg: "Game Draw")
         }
        
     }
     
-    func showAlert(){
-        let alert = UIAlertController(title: "Success", message: nil, preferredStyle: .alert)
+    func showAlert(msg:String){
+        let alert = UIAlertController(title: "Success", message: msg, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default){_ in
             self.resetBoard()
         }
-        print(alert.message = "Player WON : " + winPlayer)
-        alert.message = "Player WON : " + winPlayer
+        //print(alert.message = "Player WON : " + winPlayer)
+        //alert.message = "Player WON : " + winPlayer
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }

@@ -254,6 +254,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="scoreOLabel" destination="lWy-ZQ-bJb" id="C2m-s9-4fH"/>
+                        <outlet property="scoreXLabel" destination="KgF-Yd-gxu" id="czN-Im-uMr"/>
                         <outletCollection property="boxes" destination="f7s-d3-osJ" collectionClass="NSMutableArray" id="qqY-x7-16n"/>
                         <outletCollection property="boxes" destination="jYF-H8-nNv" collectionClass="NSMutableArray" id="H9l-um-1yK"/>
                         <outletCollection property="boxes" destination="v7x-9u-rnH" collectionClass="NSMutableArray" id="d9Y-Z0-Lb7"/>
