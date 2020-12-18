@@ -7,13 +7,15 @@
 
 import UIKit
 
-class GameViewController: ViewController,UITextFieldDelegate {
+class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizerDelegate{
     
     
    // @IBOutlet var boxes: [UIButton]!
     
     @IBOutlet var boxes: [UIButton]!
     
+    @IBOutlet weak var playerOImageView: UIImageView!
+    @IBOutlet weak var playerXImageView: UIImageView!
     var board = [String]()
     var currentPlayer = ""
     var playerXScore = 0
@@ -34,20 +36,36 @@ class GameViewController: ViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       /* self.playerXTxtField.delegate = self
-        self.playerXTxtField.becomeFirstResponder()*/
+        let myColor : UIColor = UIColor.blue
+        playerOTxtField.layer.borderColor = myColor.cgColor
+        playerXTxtField.layer.borderColor = myColor.cgColor
+        
+        playerOTxtField.layer.borderWidth = 1.0
+        playerXTxtField.layer.borderWidth = 1.0
+        
         scoreOLabel.text = "Score : \(playerOScore)"
         scoreXLabel.text = "Score : \(playerXScore)"
         playerOTxtField.text = ""
         playerOTxtField.text = ""
         loadBoard()
-      
-        
-        
-
-       // print(board)
+       
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(chooseXPlayer(sender:)))
+        playerXImageView.addGestureRecognizer(tap1)
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(chooseOPlayer(sender:)))
+        playerOImageView.addGestureRecognizer(tap2)
+       
     
     }
+    
+   /* @objc func chooseXPlayer(sender: UITapGestureRecognizer) {
+        print("Inside X click")
+        currentPlayer = "X"
+    }
+    
+    @objc func chooseOPlayer(sender: UITapGestureRecognizer) {
+        print("Inside O click")
+        currentPlayer = "O"
+    }*/
     
     @IBAction func boxPressed(_ sender: UIButton) {
         
@@ -70,7 +88,7 @@ class GameViewController: ViewController,UITextFieldDelegate {
             sender.setTitle("X", for: .normal)
             currentPlayer = "O"
             board[index] = "X"
-        }else
+        }else if currentPlayer == "O"
         {
             sender.setTitle("O", for: .normal)
             currentPlayer = "X"
@@ -82,41 +100,6 @@ class GameViewController: ViewController,UITextFieldDelegate {
         
     }
     }
-    
-  
-   /* @IBAction func boxPressed(_ sender: UIButton)
-    {
-        if playerXTxtField.text == "" || playerOTxtField.text == ""
-        {
-            
-            showToast(message: "Please enter Player Names")
-        }else{
-            
-        let index = boxes.firstIndex(of:sender)!
-      
-        
-        //to avoid allowing user to change symbol after one turn.
-        if !board[index].isEmpty
-        {
-            return
-        }
-        if currentPlayer == "X"
-        {
-            sender.setTitle("X", for: .normal)
-            currentPlayer = "O"
-            board[index] = "X"
-        }else
-        {
-            sender.setTitle("O", for: .normal)
-            currentPlayer = "X"
-            board[index] = "O"
-        }
-        
-         
-            winners()
-        
-    }
-    }*/
     
    func loadBoard(){
     //use '_' to use for loop without variables.
@@ -132,8 +115,6 @@ class GameViewController: ViewController,UITextFieldDelegate {
         var winMsg = ""
         for rule in winRules
         {
-            //print(rule)
-        
             let playerAt0 = board[rule[0]]
             let playerAt1 = board[rule[1]]
             let playerAt2 = board[rule[2]]
@@ -183,6 +164,7 @@ class GameViewController: ViewController,UITextFieldDelegate {
         imgViewTitle.image = imgTitle
         alert.view.addSubview(imgViewTitle)
         
+        
         // height constraint
            let constraintHeight = NSLayoutConstraint(
               item: alert.view!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute:
@@ -230,9 +212,33 @@ class GameViewController: ViewController,UITextFieldDelegate {
     }
     
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
         //self.view.endEditing(true)
         textField.resignFirstResponder()
         return false
         }
+    
+   /* @objc func selectPlayer(sender:UITapGestureRecognizer){
+        let imageView = sender.view as? UIImageView
+            if imageView != nil {
+               print("Tapped image")
+            }
+    }*/
+    
+    
+    @IBAction func chooseXPlayer(sender: UITapGestureRecognizer) {
+        print("Inside X click")
+        currentPlayer = "X"
+    }
+    
+    @IBAction func chooseOPlayer(sender: UITapGestureRecognizer) {
+        
+        print("Inside O Click")
+        
+        currentPlayer = "O"
+    }
+    
+   
+    
 }

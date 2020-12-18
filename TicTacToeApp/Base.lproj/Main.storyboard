@@ -60,42 +60,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cancel" translatesAutoresizingMaskIntoConstraints="NO" id="Ftn-JQ-IPu">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cancel" translatesAutoresizingMaskIntoConstraints="NO" id="Ftn-JQ-IPu">
                                 <rect key="frame" x="38" y="90" width="48" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="ukS-1N-0Q4"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" translatesAutoresizingMaskIntoConstraints="NO" id="KlT-VY-nDA">
-                                <rect key="frame" x="306" y="94" width="61" height="46"/>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" translatesAutoresizingMaskIntoConstraints="NO" id="KlT-VY-nDA">
+                                <rect key="frame" x="326" y="94" width="61" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="61" id="oqS-4r-Of7"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player1" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l7P-A0-2TU">
-                                <rect key="frame" x="20" y="152" width="84" height="36"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Player1" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l7P-A0-2TU">
+                                <rect key="frame" x="20" y="152" width="84" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
                                 <connections>
                                     <outlet property="delegate" destination="pXd-Fm-oY3" id="dph-t4-GFB"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3r2-Jd-eN2">
-                                <rect key="frame" x="306" y="153" width="88" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Player2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3r2-Jd-eN2">
+                                <rect key="frame" x="326" y="153" width="68" height="31"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
                                 <connections>
                                     <outlet property="delegate" destination="pXd-Fm-oY3" id="CIg-1t-942"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KgF-Yd-gxu">
-                                <rect key="frame" x="20" y="217" width="44.5" height="41"/>
+                                <rect key="frame" x="20" y="214" width="44.5" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWy-ZQ-bJb">
-                                <rect key="frame" x="320.5" y="217" width="44.5" height="41"/>
+                                <rect key="frame" x="320.5" y="214" width="44.5" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="2ZM-xF-2Dd"/>
                                 </constraints>
@@ -119,6 +119,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q7Y-Mw-KwV">
                                                 <rect key="frame" x="0.0" y="0.0" width="92.5" height="94"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" systemColor="labelColor"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="boxPressed:" destination="pXd-Fm-oY3" eventType="touchUpInside" id="mbG-CK-hoE"/>
                                                 </connections>
@@ -126,6 +129,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2mS-Hr-8Bb">
                                                 <rect key="frame" x="103.5" y="0.0" width="93" height="94"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" systemColor="labelColor"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="boxPressed:" destination="pXd-Fm-oY3" eventType="touchUpInside" id="uF8-mJ-2ct"/>
                                                 </connections>
@@ -133,6 +139,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4zO-i1-0ab">
                                                 <rect key="frame" x="207.5" y="0.0" width="92.5" height="94"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" systemColor="labelColor"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="boxPressed:" destination="pXd-Fm-oY3" eventType="touchUpInside" id="1Ny-k7-oJS"/>
                                                 </connections>
@@ -145,6 +154,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RXL-9c-a2O">
                                                 <rect key="frame" x="0.0" y="0.0" width="92.5" height="94"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" systemColor="labelColor"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="boxPressed:" destination="pXd-Fm-oY3" eventType="touchUpInside" id="Xi2-xb-mjs"/>
                                                 </connections>
@@ -152,6 +164,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zEW-BQ-pBt">
                                                 <rect key="frame" x="103.5" y="0.0" width="93" height="94"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" systemColor="labelColor"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="boxPressed:" destination="pXd-Fm-oY3" eventType="touchUpInside" id="hqX-ip-2hK"/>
                                                 </connections>
@@ -159,6 +174,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HxL-7c-FjY">
                                                 <rect key="frame" x="207.5" y="0.0" width="92.5" height="94"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" systemColor="labelColor"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="boxPressed:" destination="pXd-Fm-oY3" eventType="touchUpInside" id="YVe-8h-ZcR"/>
                                                 </connections>
@@ -171,6 +189,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mp2-Bv-9Wc">
                                                 <rect key="frame" x="0.0" y="0.0" width="92.5" height="94"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" systemColor="labelColor"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="boxPressed:" destination="pXd-Fm-oY3" eventType="touchUpInside" id="fjf-l4-Lni"/>
                                                 </connections>
@@ -178,6 +199,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XR6-5V-1JY">
                                                 <rect key="frame" x="103.5" y="0.0" width="93" height="94"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" systemColor="labelColor"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="boxPressed:" destination="pXd-Fm-oY3" eventType="touchUpInside" id="E0s-NV-Vmk"/>
                                                 </connections>
@@ -185,6 +209,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8y3-M0-7sO">
                                                 <rect key="frame" x="207.5" y="0.0" width="92.5" height="94"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" systemColor="labelColor"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="boxPressed:" destination="pXd-Fm-oY3" eventType="touchUpInside" id="8bh-TT-wfV"/>
                                                 </connections>
@@ -200,6 +227,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aVJ-gc-imQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="lWy-ZQ-bJb" firstAttribute="firstBaseline" secondItem="KgF-Yd-gxu" secondAttribute="firstBaseline" id="2fU-e5-NRp"/>
                             <constraint firstItem="3r2-Jd-eN2" firstAttribute="trailing" secondItem="B58-2r-yqd" secondAttribute="trailingMargin" id="7ep-rk-LKd"/>
@@ -224,9 +252,15 @@
                             <constraint firstItem="9bO-uG-ROX" firstAttribute="centerY" secondItem="B58-2r-yqd" secondAttribute="centerY" id="xfO-Oe-erf"/>
                             <constraint firstItem="l7P-A0-2TU" firstAttribute="centerY" secondItem="3r2-Jd-eN2" secondAttribute="centerY" id="zFN-Zx-TSk"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="6Zt-wY-wMQ" appends="YES" id="ame-RB-2AH"/>
+                            <outletCollection property="gestureRecognizers" destination="uYF-Kv-XD7" appends="YES" id="f9e-8L-1Xr"/>
+                        </connections>
                     </view>
                     <connections>
+                        <outlet property="playerOImageView" destination="KlT-VY-nDA" id="XGH-Fb-tgM"/>
                         <outlet property="playerOTxtField" destination="3r2-Jd-eN2" id="Qx6-dm-0sY"/>
+                        <outlet property="playerXImageView" destination="Ftn-JQ-IPu" id="eAy-fD-KER"/>
                         <outlet property="playerXTxtField" destination="l7P-A0-2TU" id="utZ-QA-dSI"/>
                         <outlet property="scoreOLabel" destination="lWy-ZQ-bJb" id="C2m-s9-4fH"/>
                         <outlet property="scoreXLabel" destination="KgF-Yd-gxu" id="czN-Im-uMr"/>
@@ -242,6 +276,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r99-og-ZUX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="6Zt-wY-wMQ" userLabel="TapX Gesture Recognizer">
+                    <connections>
+                        <action selector="chooseXPlayer:" destination="pXd-Fm-oY3" id="LnS-vn-sXy"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="uYF-Kv-XD7" userLabel="TapO Gesture Recognizer">
+                    <connections>
+                        <action selector="chooseOPlayer:" destination="pXd-Fm-oY3" id="3My-6L-fFQ"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="814.49275362318849" y="14.732142857142856"/>
         </scene>
@@ -291,6 +335,9 @@
         <image name="circle" width="147" height="147"/>
         <image name="gridtictac3by3" width="820" height="765"/>
         <image name="play" width="258" height="259"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
