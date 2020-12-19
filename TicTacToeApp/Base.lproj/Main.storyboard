@@ -61,19 +61,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cancel" translatesAutoresizingMaskIntoConstraints="NO" id="Ftn-JQ-IPu">
-                                <rect key="frame" x="38" y="90" width="48" height="54"/>
+                                <rect key="frame" x="38" y="90" width="48" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="ukS-1N-0Q4"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" translatesAutoresizingMaskIntoConstraints="NO" id="KlT-VY-nDA">
-                                <rect key="frame" x="326" y="94" width="61" height="46"/>
+                                <rect key="frame" x="310" y="90" width="61" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="61" id="oqS-4r-Of7"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Player1" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l7P-A0-2TU">
-                                <rect key="frame" x="20" y="152" width="84" height="33"/>
+                                <rect key="frame" x="20" y="153" width="84" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
                                 <connections>
@@ -81,7 +81,11 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Player2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3r2-Jd-eN2">
-                                <rect key="frame" x="326" y="153" width="68" height="31"/>
+                                <rect key="frame" x="310" y="153" width="84" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="Nui-RS-S1Y"/>
+                                    <constraint firstAttribute="width" constant="84" id="jDF-yr-ObZ"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
                                 <connections>
@@ -89,13 +93,13 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KgF-Yd-gxu">
-                                <rect key="frame" x="20" y="214" width="44.5" height="41"/>
+                                <rect key="frame" x="20" y="215" width="44.5" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWy-ZQ-bJb">
-                                <rect key="frame" x="320.5" y="214" width="44.5" height="41"/>
+                                <rect key="frame" x="349.5" y="215" width="44.5" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="2ZM-xF-2Dd"/>
                                 </constraints>
@@ -224,20 +228,27 @@
                                     <constraint firstAttribute="height" constant="300" id="n2q-Fe-nHa"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap Symbol To Play" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eU8-Nj-38t">
+                                <rect key="frame" x="115" y="64" width="184" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aVJ-gc-imQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="lWy-ZQ-bJb" firstAttribute="firstBaseline" secondItem="KgF-Yd-gxu" secondAttribute="firstBaseline" id="2fU-e5-NRp"/>
+                            <constraint firstItem="KlT-VY-nDA" firstAttribute="top" secondItem="aVJ-gc-imQ" secondAttribute="top" constant="46" id="76w-hl-VbI"/>
                             <constraint firstItem="3r2-Jd-eN2" firstAttribute="trailing" secondItem="B58-2r-yqd" secondAttribute="trailingMargin" id="7ep-rk-LKd"/>
+                            <constraint firstItem="3r2-Jd-eN2" firstAttribute="top" secondItem="KlT-VY-nDA" secondAttribute="bottom" constant="8" symbolic="YES" id="EaR-9m-OLY"/>
                             <constraint firstItem="9bO-uG-ROX" firstAttribute="centerX" secondItem="B58-2r-yqd" secondAttribute="centerX" id="FCI-Z6-nqU"/>
-                            <constraint firstItem="aVJ-gc-imQ" firstAttribute="trailing" secondItem="lWy-ZQ-bJb" secondAttribute="trailing" constant="49" id="KL9-g9-xR6"/>
                             <constraint firstItem="WBk-Fi-ucp" firstAttribute="centerY" secondItem="B58-2r-yqd" secondAttribute="centerY" id="McV-S6-C4s"/>
                             <constraint firstItem="Ftn-JQ-IPu" firstAttribute="leading" secondItem="aVJ-gc-imQ" secondAttribute="leading" constant="38" id="Pb5-Gf-bvQ"/>
+                            <constraint firstItem="eU8-Nj-38t" firstAttribute="top" secondItem="aVJ-gc-imQ" secondAttribute="top" constant="20" id="X6V-2Z-hal"/>
                             <constraint firstItem="Ftn-JQ-IPu" firstAttribute="top" secondItem="aVJ-gc-imQ" secondAttribute="top" constant="46" id="YLa-EH-eAz"/>
-                            <constraint firstItem="KlT-VY-nDA" firstAttribute="top" secondItem="aVJ-gc-imQ" secondAttribute="top" constant="50" id="anf-Wp-nVf"/>
-                            <constraint firstItem="lWy-ZQ-bJb" firstAttribute="top" secondItem="3r2-Jd-eN2" secondAttribute="bottom" constant="30" id="b4h-lR-5CI"/>
+                            <constraint firstItem="eU8-Nj-38t" firstAttribute="centerX" secondItem="WBk-Fi-ucp" secondAttribute="centerX" id="bgv-ha-3Qh"/>
                             <constraint firstItem="KlT-VY-nDA" firstAttribute="centerY" secondItem="Ftn-JQ-IPu" secondAttribute="centerY" id="chH-RI-6wS"/>
                             <constraint firstItem="l7P-A0-2TU" firstAttribute="top" secondItem="Ftn-JQ-IPu" secondAttribute="bottom" constant="8" symbolic="YES" id="dmR-ds-k6V"/>
                             <constraint firstItem="lWy-ZQ-bJb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KgF-Yd-gxu" secondAttribute="trailing" constant="8" symbolic="YES" id="dwY-Xi-Goo"/>
@@ -247,6 +258,7 @@
                             <constraint firstItem="Ftn-JQ-IPu" firstAttribute="centerX" secondItem="l7P-A0-2TU" secondAttribute="centerX" id="lx8-qR-ZI6"/>
                             <constraint firstItem="l7P-A0-2TU" firstAttribute="leading" secondItem="B58-2r-yqd" secondAttribute="leadingMargin" id="omU-WT-Cdw"/>
                             <constraint firstItem="KlT-VY-nDA" firstAttribute="leading" secondItem="3r2-Jd-eN2" secondAttribute="leading" id="t0S-Da-ulZ"/>
+                            <constraint firstItem="aVJ-gc-imQ" firstAttribute="trailing" secondItem="lWy-ZQ-bJb" secondAttribute="trailing" constant="20" id="w4F-jt-lQs"/>
                             <constraint firstItem="l7P-A0-2TU" firstAttribute="leading" secondItem="KgF-Yd-gxu" secondAttribute="leading" id="wgg-Qr-Qsj"/>
                             <constraint firstItem="3r2-Jd-eN2" firstAttribute="top" secondItem="B58-2r-yqd" secondAttribute="top" constant="153" id="wjl-Fw-dwm"/>
                             <constraint firstItem="9bO-uG-ROX" firstAttribute="centerY" secondItem="B58-2r-yqd" secondAttribute="centerY" id="xfO-Oe-erf"/>
@@ -264,6 +276,7 @@
                         <outlet property="playerXTxtField" destination="l7P-A0-2TU" id="utZ-QA-dSI"/>
                         <outlet property="scoreOLabel" destination="lWy-ZQ-bJb" id="C2m-s9-4fH"/>
                         <outlet property="scoreXLabel" destination="KgF-Yd-gxu" id="czN-Im-uMr"/>
+                        <outlet property="selectSymbolLabel" destination="eU8-Nj-38t" id="ifI-ZG-gc4"/>
                         <outletCollection property="boxes" destination="Q7Y-Mw-KwV" collectionClass="NSMutableArray" id="Oxl-5n-JrM"/>
                         <outletCollection property="boxes" destination="2mS-Hr-8Bb" collectionClass="NSMutableArray" id="UOr-xI-yoU"/>
                         <outletCollection property="boxes" destination="4zO-i1-0ab" collectionClass="NSMutableArray" id="B1J-1W-ewd"/>

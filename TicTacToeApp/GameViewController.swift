@@ -21,11 +21,14 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
     var playerXScore = 0
     var playerOScore = 0
     var winPlayer = ""
+    let myColor : UIColor = UIColor.blue
+    let myDefaultColor : UIColor = UIColor.white
     
     @IBOutlet weak var playerOTxtField: UITextField!
     @IBOutlet weak var playerXTxtField: UITextField!
     @IBOutlet weak var scoreOLabel: UILabel!
     @IBOutlet weak var scoreXLabel: UILabel!
+    @IBOutlet weak var selectSymbolLabel: UILabel!
     
     //2D array of array of subarrays
     var winRules = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
@@ -36,7 +39,11 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let myColor : UIColor = UIColor.blue
+        self.selectSymbolLabel.isHidden = true
+        
+        //self.selectSymbolLabel.alpha = 0
+        
+        //let myColor : UIColor = UIColor.blue
         playerOTxtField.layer.borderColor = myColor.cgColor
         playerXTxtField.layer.borderColor = myColor.cgColor
         
@@ -73,12 +80,14 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         {
             
             showToast(message: "Please enter Player Names")
-        }else{
+        }
+        else
+        {
             
         let index = boxes.firstIndex(of:sender)!
       
         
-        //to avoid allowing user to change symbol after one turn.
+        //to avoid allowing user to change symbol inside box after one turn.
         if !board[index].isEmpty
         {
             return
@@ -88,17 +97,62 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
             sender.setTitle("X", for: .normal)
             currentPlayer = "O"
             board[index] = "X"
+            disableXViews()
         }else if currentPlayer == "O"
         {
             sender.setTitle("O", for: .normal)
             currentPlayer = "X"
             board[index] = "O"
+            disableOViews()
+        }else if currentPlayer == ""
+        {
+            playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
+            playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
+            makeLabelInvincible()
         }
         
          
             winners()
         
     }
+    }
+    
+    func makeLabelInvincible(){
+        self.selectSymbolLabel.isHidden = false
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: [.curveEaseInOut,.autoreverse,.repeat], animations: {self.selectSymbolLabel.alpha = 0.0},completion: stopBlink(finished:))
+    }
+    
+    func stopBlink(finished:Bool){
+        self.selectSymbolLabel.layer.removeAllAnimations()
+        self.selectSymbolLabel.alpha = 1
+        self.selectSymbolLabel.isHidden = true
+    }
+    
+    func disableOViews()
+    {
+        print("Inside disable O views")
+       // playerOImageView.isHighlighted = false
+        playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
+        playerXImageView.layer.backgroundColor = myColor.cgColor
+        /*playerOTxtField.isHighlighted = false
+        scoreOLabel.isHighlighted = false
+        
+        playerXImageView.isHighlighted = true
+        playerXTxtField.isHighlighted = true
+        scoreXLabel.isHighlighted = true*/
+    }
+    
+    func disableXViews()
+    {
+        print("Inside disable X Views")
+        playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
+        playerOImageView.layer.backgroundColor = myColor.cgColor
+        /*playerXTxtField.isHighlighted = false
+        scoreXLabel.isHighlighted = false
+        
+        playerOImageView.isHighlighted = true
+        playerOTxtField.isHighlighted = true
+        scoreOLabel.isHighlighted = true*/
     }
     
    func loadBoard(){
@@ -148,12 +202,16 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         if !board.contains("")
         {
             showAlert(msg: "Game Draw")
+            playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
+            playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
         }
        
     }
     
     func showAlert(msg:String){
         let alert = UIAlertController(title: "Success", message: msg, preferredStyle: .alert)
+        playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
+        playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
         let action = UIAlertAction(title: "OK", style: .default){_ in
             self.resetBoard()
         }
@@ -189,6 +247,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         for button in boxes{
             button.setTitle(nil, for: .normal)
         }
+        currentPlayer = ""
     }
     
     func showToast(message : String)
@@ -230,15 +289,18 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
     @IBAction func chooseXPlayer(sender: UITapGestureRecognizer) {
         print("Inside X click")
         currentPlayer = "X"
+        stopBlink(finished: true)
+        playerXImageView.layer.backgroundColor =
+            myColor.cgColor
+        playerOImageView.layer.backgroundColor =  myDefaultColor.cgColor
+        
     }
     
     @IBAction func chooseOPlayer(sender: UITapGestureRecognizer) {
-        
         print("Inside O Click")
-        
         currentPlayer = "O"
+        stopBlink(finished: true)
+        playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
+        playerOImageView.layer.backgroundColor = myColor.cgColor
     }
-    
-   
-    
 }
