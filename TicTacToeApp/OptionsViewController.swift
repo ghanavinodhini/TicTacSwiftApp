@@ -8,13 +8,33 @@
 import UIKit
 
 class OptionsViewController: ViewController {
+    
+    let seagueToGameVC = "seagueToGameVC"
 
+   
+    @IBOutlet weak var selectGridOptBtn: UIButton!
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
+    
+    @IBAction func optionBtnClick(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: seagueToGameVC, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         if segue.identifier == seagueToGameVC {
+            
+            let destinationVC = segue.destination as? GameViewController
+         }
+    }
 
     /*
     // MARK: - Navigation

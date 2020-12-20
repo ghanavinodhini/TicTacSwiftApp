@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Options View Controller-->
         <scene sceneID="SA6-DN-t1X">
             <objects>
-                <viewController id="65K-4t-Q0Z" sceneMemberID="viewController">
+                <viewController restorationIdentifier="OptionsViewController" storyboardIdentifier="OptionsViewController" id="65K-4t-Q0Z" customClass="OptionsViewController" customModule="TicTacToeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QaM-PX-aP8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -33,7 +33,8 @@
                                     <color key="titleColor" systemColor="systemIndigoColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="pXd-Fm-oY3" kind="presentation" modalPresentationStyle="overFullScreen" id="Sie-yv-xX2"/>
+                                    <action selector="optionBtnClick:" destination="65K-4t-Q0Z" eventType="touchUpInside" id="y3u-WM-TFs"/>
+                                    <action selector="selectOptBtn:" destination="r3i-Ft-Sz0" eventType="touchUpInside" id="lBb-KA-rIX"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -47,8 +48,13 @@
                             <constraint firstItem="hpc-Ps-kGC" firstAttribute="top" secondItem="Pxa-By-1uO" secondAttribute="top" constant="150" id="rhP-XR-c6B"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="selectGridOptBtn" destination="GNH-wd-Xvk" id="lHe-hA-n9l"/>
+                        <segue destination="pXd-Fm-oY3" kind="presentation" identifier="seagueToGameVC" modalPresentationStyle="overFullScreen" id="pm0-Ik-Y6f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4m-i4-TIS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="r3i-Ft-Sz0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="72" y="15"/>
         </scene>
