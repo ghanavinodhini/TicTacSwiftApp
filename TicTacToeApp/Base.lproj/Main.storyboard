@@ -23,13 +23,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNH-wd-Xvk">
-                                <rect key="frame" x="93" y="349" width="230" height="58"/>
-                                <color key="backgroundColor" red="0.82904177904129028" green="0.21967383535459981" blue="0.63154620135657058" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="58" id="LM7-ee-ATZ"/>
-                                </constraints>
+                                <rect key="frame" x="20" y="281" width="374" height="76"/>
+                                <color key="backgroundColor" red="1" green="0.6114232651" blue="0.84468955830000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Kefa-Regular" family="Kefa" pointSize="40"/>
-                                <state key="normal" title="3 x 3">
+                                <state key="normal" title="Human + Human">
                                     <color key="titleColor" systemColor="systemIndigoColor"/>
                                 </state>
                                 <connections>
@@ -37,18 +34,36 @@
                                     <action selector="selectOptBtn:" destination="r3i-Ft-Sz0" eventType="touchUpInside" id="lBb-KA-rIX"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Kv-hQ-b3A">
+                                <rect key="frame" x="32" y="410" width="350" height="76"/>
+                                <color key="backgroundColor" red="1" green="0.6114232651" blue="0.84468955830000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="76" id="EH1-JS-h18"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Kefa-Regular" family="Kefa" pointSize="40"/>
+                                <state key="normal" title="Human + Computer">
+                                    <color key="titleColor" systemColor="systemIndigoColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="computerGameBtnClick:" destination="65K-4t-Q0Z" eventType="touchUpInside" id="ivu-Ov-uFr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Pxa-By-1uO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Pxa-By-1uO" firstAttribute="bottom" secondItem="GNH-wd-Xvk" secondAttribute="bottom" constant="455" id="2XD-Qa-vgl"/>
-                            <constraint firstItem="Pxa-By-1uO" firstAttribute="trailing" secondItem="GNH-wd-Xvk" secondAttribute="trailing" constant="91" id="G1u-kD-jFo"/>
-                            <constraint firstItem="GNH-wd-Xvk" firstAttribute="leading" secondItem="Pxa-By-1uO" secondAttribute="leading" constant="93" id="MsH-u0-rMY"/>
+                            <constraint firstItem="GNH-wd-Xvk" firstAttribute="centerX" secondItem="hpc-Ps-kGC" secondAttribute="centerX" id="BFw-0s-xBu"/>
                             <constraint firstItem="hpc-Ps-kGC" firstAttribute="centerX" secondItem="QaM-PX-aP8" secondAttribute="centerX" id="T2L-wN-0Hg"/>
+                            <constraint firstItem="9Kv-hQ-b3A" firstAttribute="centerX" secondItem="QaM-PX-aP8" secondAttribute="centerX" id="a8O-4o-16h"/>
+                            <constraint firstItem="GNH-wd-Xvk" firstAttribute="top" secondItem="hpc-Ps-kGC" secondAttribute="bottom" constant="32.5" id="cHN-7k-dXI"/>
+                            <constraint firstItem="GNH-wd-Xvk" firstAttribute="leading" secondItem="QaM-PX-aP8" secondAttribute="leadingMargin" id="hhZ-rM-uld"/>
+                            <constraint firstItem="9Kv-hQ-b3A" firstAttribute="centerY" secondItem="QaM-PX-aP8" secondAttribute="centerY" id="mg8-dj-1zW"/>
                             <constraint firstItem="hpc-Ps-kGC" firstAttribute="top" secondItem="Pxa-By-1uO" secondAttribute="top" constant="150" id="rhP-XR-c6B"/>
+                            <constraint firstItem="9Kv-hQ-b3A" firstAttribute="top" secondItem="GNH-wd-Xvk" secondAttribute="bottom" constant="53" id="sCD-tE-ugp"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="computerGameOptBtn" destination="9Kv-hQ-b3A" id="W0S-QE-xrS"/>
                         <outlet property="selectGridOptBtn" destination="GNH-wd-Xvk" id="lHe-hA-n9l"/>
                         <segue destination="pXd-Fm-oY3" kind="presentation" identifier="seagueToGameVC" modalPresentationStyle="overFullScreen" id="pm0-Ik-Y6f"/>
                     </connections>
@@ -56,7 +71,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4m-i4-TIS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="r3i-Ft-Sz0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="72" y="15"/>
+            <point key="canvasLocation" x="71.014492753623188" y="14.732142857142856"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="o0V-R0-xqh">

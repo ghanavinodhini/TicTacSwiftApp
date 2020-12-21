@@ -11,9 +11,12 @@ class OptionsViewController: ViewController {
     
     let seagueToGameVC = "seagueToGameVC"
 
+    var computerModeGameBtn = false
+    var playersModeGameBtn = false
    
     @IBOutlet weak var selectGridOptBtn: UIButton!
     
+    @IBOutlet weak var computerGameOptBtn: UIButton!
     
     
     
@@ -26,6 +29,17 @@ class OptionsViewController: ViewController {
     
     @IBAction func optionBtnClick(_ sender: UIButton) {
         
+        computerModeGameBtn = false
+        playersModeGameBtn = true
+        
+        performSegue(withIdentifier: seagueToGameVC, sender: self)
+    }
+    
+    
+    @IBAction func computerGameBtnClick(_ sender: UIButton) {
+        
+        computerModeGameBtn = true
+        playersModeGameBtn = false
         performSegue(withIdentifier: seagueToGameVC, sender: self)
     }
     
@@ -33,6 +47,14 @@ class OptionsViewController: ViewController {
          if segue.identifier == seagueToGameVC {
             
             let destinationVC = segue.destination as? GameViewController
+            
+            if playersModeGameBtn == true{
+                destinationVC?.gameComputerMode = false
+            }
+            
+            if playersModeGameBtn == false{
+                destinationVC?.gameComputerMode = true
+            }
          }
     }
 

@@ -31,12 +31,45 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
     //2D array of  subarrays
     var winRules = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
     
-   
+    //Assign Computer Mode Symbols
+    let computerSymbol = "O"
+    var gameComputerMode : Bool = false
+    let playerSymbol = "X"
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Initialise score,textfields,animation label
+        setObjectsInitialisation()
+        
+        //Initialise tap gestures for symbol imageviews
+        symbolTapInitialise()
+        
+        
+        //Load board initially
+        loadBoard()
+       
+    
+        //Call computerMode function
+        if(gameComputerMode == true)
+        {
+            playerOImageView.isUserInteractionEnabled = false
+            playerOTxtField.text = "Computer"
+            playerOTxtField.isEnabled = false
+            print("Before calling playComputerMode function")
+            playComputerMode()
+        }
+        if(gameComputerMode == false)
+        {
+            print("Inside if statement of gameComputer Mode false condition")
+            playerOImageView.isUserInteractionEnabled = true
+            playerOTxtField.isEnabled = true
+        }
+    }
+    
+    func setObjectsInitialisation()
+    {
         //Hide Select Symbol label initially
         self.selectSymbolLabel.isHidden = true
         
@@ -51,57 +84,37 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         //Initialise score and player textfields
         scoreOLabel.text = "Score : \(playerOScore)"
         scoreXLabel.text = "Score : \(playerXScore)"
+        playerXTxtField.text = ""
         playerOTxtField.text = ""
-        playerOTxtField.text = ""
-        
-        //Load board initially
-        loadBoard()
-       
+    }
+    
+    func symbolTapInitialise()
+    {
         //Add tap gesture recogniser for 2 symbol image views
-        //let tap1 = UITapGestureRecognizer(target: self, action: #selector(chooseXPlayer(sender:)))
-        let tap1 = UITapGestureRecognizer(target: self, action: #selector(chooseXPlayer))
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(chooseXPlayer))     /**(chooseXPlayer(sender:) previously*/
         playerXImageView.addGestureRecognizer(tap1)
-        //let tap2 = UITapGestureRecognizer(target: self, action: #selector(chooseOPlayer(sender:)))
-        let tap2 = UITapGestureRecognizer(target: self, action: #selector(chooseOPlayer))
-        playerOImageView.addGestureRecognizer(tap2)
        
-    
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(chooseOPlayer))  /**(chooseOPlayer(sender:) previously*/
+        playerOImageView.addGestureRecognizer(tap2)
     }
-    
-   
-    
-   /* @objc func chooseXPlayer(sender: UITapGestureRecognizer) {
-     print("Inside X click")
-     currentPlayer = "X"
-     stopBlink(finished: true)
-     playerXImageView.layer.backgroundColor = myColor.cgColor
-     playerOImageView.layer.backgroundColor =  myDefaultColor.cgColor
-    }
-    
-    @objc func chooseOPlayer(sender: UITapGestureRecognizer) {
-     print("Inside O Click")
-     currentPlayer = "O"
-     stopBlink(finished: true)
-     playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
-     playerOImageView.layer.backgroundColor = myColor.cgColor
-    }*/
     
     @IBAction func boxPressed(_ sender: UIButton)
     {
-        
-            //Check if player names are entered in textfields
-        if playerXTxtField.text == "" || playerOTxtField.text == ""
+        if gameComputerMode == true && currentPlayer == computerSymbol
         {
-            //showToast(message: "Please enter Player Names")
-            makeLabelInvincible(msg: "Please enter Player Names")
+            print("Inside boxPressed if conditon of gameComputerMode true")
+            callComputerToPlay()
+            return
         }
+            //Check if player names are entered in textfields
+            validatePlayerTxtFields()
+        
         
             //Continue game if player names are entered
-        else
-        {
+        
             //Get index of the button clicked
         let index = boxes.firstIndex(of:sender)!
-      
+      print("Inside else part after cheking player text fields: index value,current player : \(index),\(currentPlayer)")
             //to avoid allowing user to change symbol inside box after one turn.
         if !board[index].isEmpty
         {
@@ -110,14 +123,17 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
             //Check if clicked button value is 'X'
         if currentPlayer == "X"
         {
+            print("Inside box pressed currentplayer X if condition")
             sender.setTitle("X", for: .normal)
-            currentPlayer = "O"
             board[index] = "X"
             disableXViews()
+            currentPlayer = "O"
+            
         }
             //Check if clicked button value is 'O'
         else if currentPlayer == "O"
         {
+            print("Inside box pressed currentPlayer O if condition")
             sender.setTitle("O", for: .normal)
             currentPlayer = "X"
             board[index] = "O"
@@ -126,16 +142,29 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
             //Check if no player selected by checking button value in grid
         else if currentPlayer == ""
         {
+            print("Inside box pressed currentplayer Empty if condition")
             playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
             playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
             //makeLabelInvincible()
             makeLabelInvincible(msg:"Tap Symbol to select Player")
         }
             //Check for winners
-            winners()
+            //winners()
+            
+           callComputerToPlay()
         
     }
+    
+    
+    func validatePlayerTxtFields()
+    {
+        if playerXTxtField.text == "" || playerOTxtField.text == ""
+        {
+            print("Inside checking playername text fields")
+            makeLabelInvincible(msg: "Please enter Player Names")
+        }
     }
+    
     
     //Change symbolselect label text and animation to visible and blink
     func makeLabelInvincible(msg:String)
@@ -266,30 +295,15 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         for button in boxes{
             button.setTitle(nil, for: .normal)
         }
+        if gameComputerMode == false
+        {
         currentPlayer = ""
+        }
+        if gameComputerMode == true
+        {
+            currentPlayer = computerSymbol
+        }
     }
-    
-    //Toast message for player text fiels empty
-   /* func showToast(message : String)
-    {
-
-        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 175, y: self.view.frame.size.height-100, width: 350, height: 35))
-        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        toastLabel.textColor = UIColor.white
-        toastLabel.textAlignment = .center;
-        toastLabel.font = UIFont(name: "Montserrat-Light", size: 12.0)
-        toastLabel.text = message
-        toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 10;
-        toastLabel.clipsToBounds  =  true
-        self.view.addSubview(toastLabel)
-        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
-            toastLabel.alpha = 0.0
-        }, completion: {(isCompleted) in
-            toastLabel.removeFromSuperview()
-        })
-    }*/
-    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
@@ -308,13 +322,6 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
             }
     }
     
-   /* @objc func selectPlayer(sender:UITapGestureRecognizer){
-        let imageView = sender.view as? UIImageView
-            if imageView != nil {
-               print("Tapped image")
-            }
-    }*/
-    
     
     @IBAction func chooseXPlayer(_ sender: UITapGestureRecognizer) {
         print("Inside X click")
@@ -331,5 +338,86 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         stopBlink(finished: true)
         playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
         playerOImageView.layer.backgroundColor = myColor.cgColor
+    }
+    
+    
+    func playComputerMode(){
+        
+        print("Inside playComputerMove function")
+        let randNum = Int.random(in:0...8)
+        print("Random Number: \(randNum)")
+        
+        let index = randNum
+        board[index] = "O"
+        boxes[index].setTitle("O",for: .normal)
+    }
+    
+    func predictMove()
+    {
+        print("Inside predictMove function")
+        for rule in winRules
+        {
+            let playerAt0 = board[rule[0]]
+            let playerAt1 = board[rule[1]]
+            let playerAt2 = board[rule[2]]
+            
+            print("Player position values   : \(playerAt0)-\(playerAt1)-\(playerAt2)")
+            
+            if playerAt0 == playerAt1 || playerAt1 == playerAt2 || playerAt0 == playerAt2
+            {
+                if board[rule[0]].isEmpty && currentPlayer == computerSymbol
+                {
+                    /************************************************************************/
+                    print("board[rule[0]] value : \(board[rule[0]])")
+                    print("rule[0] value : \(rule[0])")
+                    print("current player : \(currentPlayer)")
+                    /************************************************************************/
+                    
+                    let index = rule[0]
+                    boxes[index].setTitle("O", for: .normal)
+                    board[index] = "O"
+                    //currentPlayer = playerSymbol
+                    return
+                }
+                
+                if board[rule[1]].isEmpty && currentPlayer == computerSymbol
+                {
+                    /************************************************************************/
+                    print("board[rule[1]] value : \(board[rule[1]])")
+                    print("rule[1] value : \(rule[1])")
+                    print("current player : \(currentPlayer)")
+                    /************************************************************************/
+                    
+                    let index = rule[1]
+                    boxes[index].setTitle("O", for: .normal)
+                    board[index] = "O"
+                    //currentPlayer = playerSymbol
+                    return
+                }
+                
+                if board[rule[2]].isEmpty && currentPlayer == computerSymbol
+                {
+                    /************************************************************************/
+                    print("board[rule[2]] value : \(board[rule[2]])")
+                    print("rule[2] value : \(rule[2])")
+                    print("current player : \(currentPlayer)")
+                    /************************************************************************/
+                    
+                    let index = rule[2]
+                    boxes[index].setTitle("O", for: .normal)
+                    board[index] = "O"
+                    //currentPlayer = playerSymbol
+                    return
+                }
+            }
+        }
+    }
+    
+    func callComputerToPlay()
+    {
+        predictMove()
+        print("After calling predictMove in callComputerToPlay")
+        winners()
+        currentPlayer  = playerSymbol
     }
 }
