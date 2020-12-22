@@ -111,9 +111,11 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         
         
     //Check if player names are entered in textfields
-        validatePlayerTxtFields()
+        let playerTxtBool = validatePlayerTxtFields()
         
     //Get index of the button clicked
+        if playerTxtBool == true
+        {
         let index = boxes.firstIndex(of:sender)!
         print("Inside else part after cheking player text fields: index value,current player : \(index),\(currentPlayer)")
         
@@ -124,15 +126,19 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         }
         
         callHumanToPlay(sender,index)
-    }
+        }
+        }
     
-    func validatePlayerTxtFields()
+    func validatePlayerTxtFields()->Bool
     {
         if playerXTxtField.text == "" || playerOTxtField.text == ""
         {
             print("Inside checking playername text fields")
             makeLabelInvincible(msg: "Please enter Player Names")
-            return
+            return false
+        }else
+        {
+            return true
         }
     }
     
@@ -189,7 +195,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
     {
         self.selectSymbolLabel.text = msg
         self.selectSymbolLabel.isHidden = false
-        UIView.animate(withDuration: 1.0, delay: 0.0, options: [.curveEaseInOut,.autoreverse,.repeat], animations: {self.selectSymbolLabel.alpha = 0.0;self.selectSymbolLabel.layoutIfNeeded()},completion: stopBlink(finished:))
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: [.curveEaseInOut,.autoreverse,.repeat], animations: {self.selectSymbolLabel.alpha = 0.0},completion: stopBlink(finished:))
     }
     
     //Make symbol select label animation stop and invisible
@@ -321,8 +327,8 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         if gameComputerMode == true
         {
             currentPlayer = computerSymbol
-           // playComputerMode()
-           // currentPlayer = playerSymbol
+           playComputerMode()
+            currentPlayer = playerSymbol
         }
     }
     
@@ -371,6 +377,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         let index = randNum
         board[index] = "O"
         boxes[index].setTitle("O",for: .normal)
+        currentPlayer = playerSymbol
     }
     
     func predictMove()
