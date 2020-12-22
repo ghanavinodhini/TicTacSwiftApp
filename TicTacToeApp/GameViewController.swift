@@ -51,7 +51,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         loadBoard()
        
     
-        //Call computerMode function
+        //Call computerMode function if game with computer
         if(gameComputerMode == true)
         {
             playerOImageView.isUserInteractionEnabled = false
@@ -103,58 +103,27 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         if gameComputerMode == true && currentPlayer == computerSymbol
         {
             print("Inside boxPressed if conditon of gameComputerMode true")
+            changeOImgColor()
             callComputerToPlay()
             return
         }
-            //Check if player names are entered in textfields
-            validatePlayerTxtFields()
         
         
-            //Continue game if player names are entered
+    //Check if player names are entered in textfields
+        validatePlayerTxtFields()
         
-            //Get index of the button clicked
+    //Get index of the button clicked
         let index = boxes.firstIndex(of:sender)!
-      print("Inside else part after cheking player text fields: index value,current player : \(index),\(currentPlayer)")
-            //to avoid allowing user to change symbol inside box after one turn.
+        print("Inside else part after cheking player text fields: index value,current player : \(index),\(currentPlayer)")
+        
+    //to avoid allowing user to change symbol inside box after one turn.
         if !board[index].isEmpty
         {
             return
         }
-            //Check if clicked button value is 'X'
-        if currentPlayer == "X"
-        {
-            print("Inside box pressed currentplayer X if condition")
-            sender.setTitle("X", for: .normal)
-            board[index] = "X"
-            disableXViews()
-            currentPlayer = "O"
-            
-        }
-            //Check if clicked button value is 'O'
-        else if currentPlayer == "O"
-        {
-            print("Inside box pressed currentPlayer O if condition")
-            sender.setTitle("O", for: .normal)
-            currentPlayer = "X"
-            board[index] = "O"
-            disableOViews()
-        }
-            //Check if no player selected by checking button value in grid
-        else if currentPlayer == ""
-        {
-            print("Inside box pressed currentplayer Empty if condition")
-            playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
-            playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
-            //makeLabelInvincible()
-            makeLabelInvincible(msg:"Tap Symbol to select Player")
-        }
-            //Check for winners
-            //winners()
-            
-           callComputerToPlay()
         
+        callHumanToPlay(sender,index)
     }
-    
     
     func validatePlayerTxtFields()
     {
@@ -162,7 +131,55 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         {
             print("Inside checking playername text fields")
             makeLabelInvincible(msg: "Please enter Player Names")
+            return
         }
+    }
+    
+    
+    func callHumanToPlay(_ sender:UIButton, _ index:Int) {
+        //Check if clicked button value is 'X'
+            if currentPlayer == "X"
+            {
+                print("Inside box pressed currentplayer X if condition")
+                sender.setTitle("X", for: .normal)
+                board[index] = "X"
+                changeXImgColor()
+                currentPlayer = "O"
+                
+            }
+        //Check if clicked button value is 'O'
+            else if currentPlayer == "O"
+            {
+                print("Inside box pressed currentPlayer O if condition")
+                sender.setTitle("O", for: .normal)
+                board[index] = "O"
+                changeOImgColor()
+                currentPlayer = "X"
+            }
+        //Check if no player selected by checking button value in grid
+            else if currentPlayer == ""
+            {
+                print("Inside box pressed currentplayer Empty if condition")
+                playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
+                playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
+                makeLabelInvincible(msg:"Tap Symbol to select Player")
+            }
+        //Check for winners
+            winners()
+        
+        //Call computerPlay if game mode is with computer
+        if gameComputerMode == true
+        {
+            callComputerToPlay()
+        }
+    }
+    
+    func callComputerToPlay()
+    {
+        predictMove()
+        print("After calling predictMove in callComputerToPlay")
+        winners()
+        currentPlayer  = playerSymbol
     }
     
     
@@ -171,7 +188,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
     {
         self.selectSymbolLabel.text = msg
         self.selectSymbolLabel.isHidden = false
-        UIView.animate(withDuration: 1.0, delay: 0.0, options: [.curveEaseInOut,.autoreverse,.repeat], animations: {self.selectSymbolLabel.alpha = 0.0},completion: stopBlink(finished:))
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: [.curveEaseInOut,.autoreverse,.repeat], animations: {self.selectSymbolLabel.alpha = 0.0;self.selectSymbolLabel.layoutIfNeeded()},completion: stopBlink(finished:))
     }
     
     //Make symbol select label animation stop and invisible
@@ -182,17 +199,17 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
     }
     
     //Change background color of symbol 'O' blue if X's turn
-    func disableOViews()
+    func changeOImgColor()
     {
-        print("Inside disable O views")
+        print("Inside change O background color")
         playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
         playerXImageView.layer.backgroundColor = myColor.cgColor
     }
     
     //Change background color of symbol 'X' blue if O's turn
-    func disableXViews()
+    func changeXImgColor()
     {
-        print("Inside disable X Views")
+        print("Inside chage X background color")
         playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
         playerOImageView.layer.backgroundColor = myColor.cgColor
     }
@@ -250,6 +267,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
             showAlert(msg: "Game Draw")
             playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
             playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
+            return
         }
        
     }
@@ -302,6 +320,8 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         if gameComputerMode == true
         {
             currentPlayer = computerSymbol
+           // playComputerMode()
+           // currentPlayer = playerSymbol
         }
     }
     
@@ -355,6 +375,8 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
     func predictMove()
     {
         print("Inside predictMove function")
+        playerXImageView.layer.backgroundColor = myColor.cgColor
+        playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
         for rule in winRules
         {
             let playerAt0 = board[rule[0]]
@@ -413,11 +435,4 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         }
     }
     
-    func callComputerToPlay()
-    {
-        predictMove()
-        print("After calling predictMove in callComputerToPlay")
-        winners()
-        currentPlayer  = playerSymbol
-    }
 }

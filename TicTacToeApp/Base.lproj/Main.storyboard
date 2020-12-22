@@ -290,6 +290,7 @@
                             <outletCollection property="gestureRecognizers" destination="uYF-Kv-XD7" appends="YES" id="f9e-8L-1Xr"/>
                         </connections>
                     </view>
+                    <navigationItem key="navigationItem" id="qrM-UT-ldr"/>
                     <connections>
                         <outlet property="playerOImageView" destination="KlT-VY-nDA" id="XGH-Fb-tgM"/>
                         <outlet property="playerOTxtField" destination="3r2-Jd-eN2" id="Qx6-dm-0sY"/>
