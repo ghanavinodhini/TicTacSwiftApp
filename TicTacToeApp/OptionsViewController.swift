@@ -23,6 +23,7 @@ class OptionsViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "Tic-Tac-Toe"
         // Do any additional setup after loading the view.
     }
     

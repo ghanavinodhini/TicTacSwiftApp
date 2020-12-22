@@ -40,6 +40,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         //Initialise score,textfields,animation label
         setObjectsInitialisation()
         
