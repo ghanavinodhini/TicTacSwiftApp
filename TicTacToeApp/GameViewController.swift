@@ -18,7 +18,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
     var currentPlayer = ""
     var playerXScore = 0
     var playerOScore = 0
-    var winPlayer = ""
+    var winPlayer  = ""
     let myColor : UIColor = UIColor.blue
     let myDefaultColor : UIColor = UIColor.white
     
@@ -85,8 +85,8 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         //Initialise score and player textfields
         scoreOLabel.text = "Score : \(playerOScore)"
         scoreXLabel.text = "Score : \(playerXScore)"
-        playerXTxtField.text = ""
-        playerOTxtField.text = ""
+        playerXTxtField.text = nil
+        playerOTxtField.text = nil
     }
     
     func symbolTapInitialise()

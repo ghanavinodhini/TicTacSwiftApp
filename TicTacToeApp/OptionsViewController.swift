@@ -18,12 +18,15 @@ class OptionsViewController: ViewController {
     
     @IBOutlet weak var computerGameOptBtn: UIButton!
     
+    @IBOutlet weak var quitBtn: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Tic-Tac-Toe"
+        
+        quitBtn.layer.cornerRadius = 20.0
         // Do any additional setup after loading the view.
     }
     
@@ -58,5 +61,19 @@ class OptionsViewController: ViewController {
             }
          }
     }
-
+    
+    
+    @IBAction func quitBtnClick(_ sender: UIButton) {
+        
+        let alert = UIAlertController(title: "QUIT", message: "Do You Want to Exit App?", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "YES", style: .default, handler: { (_) in
+            exit(0)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "NO", style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
