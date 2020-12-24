@@ -7,18 +7,17 @@
 
 import UIKit
 
-class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizerDelegate{
-    
-    
+class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizerDelegate
+{
     @IBOutlet var boxes: [UIButton]!
-    
     @IBOutlet weak var playerOImageView: UIImageView!
     @IBOutlet weak var playerXImageView: UIImageView!
     var board = [String]()
-    var currentPlayer = ""
+    var currentPlayer : String?
     var playerXScore = 0
     var playerOScore = 0
-    var winPlayer  = ""
+    //var winPlayer  = ""
+    var winPlayer : String?
     var winFound = false
     let myColor : UIColor = UIColor.blue
     let myDefaultColor : UIColor = UIColor.white
@@ -100,6 +99,14 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         playerOImageView.addGestureRecognizer(tap2)
     }
     
+    //Initialise empty value to all buttons
+   func loadBoard()
+   {
+    for _ in 0..<boxes.count{
+            board.append("")
+        }
+    }
+    
     @IBAction func boxPressed(_ sender: UIButton)
     {
         if gameComputerMode == true && currentPlayer == computerSymbol
@@ -117,8 +124,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
     //Get index of the button clicked
         if playerTxtBool == true
         {
-        let index = boxes.firstIndex(of:sender)!
-     //   print("Inside else part after cheking player text fields: index value,current player : \(index),\(currentPlayer)")
+         let index = boxes.firstIndex(of:sender)!
         
     //to avoid allowing user to change symbol inside box after one turn.
         if !board[index].isEmpty
@@ -128,7 +134,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         
         callHumanToPlay(sender,index)
         }
-        }
+    }
     
     func validatePlayerTxtFields()->Bool
     {
@@ -153,35 +159,17 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
     
     func callHumanToPlay(_ sender:UIButton, _ index:Int) {
         //Check if clicked button value is 'X'
-            if currentPlayer == "X"
-            {
-            //    print("Inside box pressed currentplayer X if condition")
-                
-                displaySymbolInBoard(sender, "X", index, "O")
-               /* sender.setTitle("X", for: .normal)
-                board[index] = "X"
-                currentPlayer = "O" */
-                changeXImgColor()
-            }
-        //Check if clicked button value is 'O'
-            else if currentPlayer == "O"
-            {
-        //        print("Inside box pressed currentPlayer O if condition")
-                displaySymbolInBoard(sender, "O", index, "X")
-               /* sender.setTitle("O", for: .normal)
-                board[index] = "O"
-                currentPlayer = "X" */
-                changeOImgColor()
-                
-            }
-        //Check if no player selected by checking button value in grid
-            else if currentPlayer == ""
-            {
-             //   print("Inside box pressed currentplayer Empty if condition")
-                playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
-                playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
-                makeLabelInvincible(msg:"Tap Symbol to select Player")
-            }
+        
+        switch currentPlayer
+        {
+        case "X" :displaySymbolInBoard(sender, "X", index, "O")
+                    changeXImgColor()
+        case "O" : displaySymbolInBoard(sender, "O", index, "X")
+                    changeOImgColor()
+        default : playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
+                    playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
+                    makeLabelInvincible(msg:"Tap Symbol to select Player")
+        }
         //Check for winners
              winners()
         
@@ -192,6 +180,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         }
     }
     
+    //Computer predicts moves, winners will be identified
     func callComputerToPlay()
     {
         predictMove()
@@ -201,47 +190,61 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         
     }
     
-    
-    //Change symbolselect label text and animation to visible and blink
-    func makeLabelInvincible(msg:String)
+    func playComputerMode()
     {
-        self.selectSymbolLabel.text = msg
-        self.selectSymbolLabel.isHidden = false
-        UIView.animate(withDuration: 1.0, delay: 0.0, options: [.curveEaseInOut,.autoreverse,.repeat], animations: {self.selectSymbolLabel.alpha = 0.0},completion: stopBlink(finished:))
+       // print("Inside playComputerMove function")
+        let randNum = Int.random(in:0...8)
+      //  print("Random Number: \(randNum)")
+        
+        let index = randNum
+        board[index] = "O"
+        boxes[index].setTitle("O",for: .normal)
+        currentPlayer = playerSymbol
     }
     
-    //Make symbol select label animation stop and invisible
-    func stopBlink(finished:Bool){
-        self.selectSymbolLabel.layer.removeAllAnimations()
-        self.selectSymbolLabel.alpha = 1
-        self.selectSymbolLabel.isHidden = true
-    }
-    
-    //Change background color of symbol 'O' blue if X's turn
-    func changeOImgColor()
+    func predictMove()
     {
-      //  print("Inside change O background color")
-        playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
+      //  print("Inside predictMove function")
         playerXImageView.layer.backgroundColor = myColor.cgColor
-    }
-    
-    //Change background color of symbol 'X' blue if O's turn
-    func changeXImgColor()
-    {
-        //print("Inside chage X background color")
-        playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
-        playerOImageView.layer.backgroundColor = myColor.cgColor
-    }
-    
-    //Initialise empty value to all buttons
-   func loadBoard(){
-    //use '_' to use for loop without variables.
-    //Use '<' to exclude  iteration of (count value-1)
-    //add to an array using 'append'
-    for _ in 0..<boxes.count{
-            board.append("")
+        playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
+        for rule in winRules
+        {
+            let playerAt0 = board[rule[0]]
+            let playerAt1 = board[rule[1]]
+            let playerAt2 = board[rule[2]]
+            
+            print("Player position values   : \(playerAt0)-\(playerAt1)-\(playerAt2)")
+            
+            //print("current player : \(currentPlayer)")
+            if playerAt0 == playerAt1 || playerAt1 == playerAt2 || playerAt0 == playerAt2
+            {
+                //looping through 3 index values row-wise, column.wise, diagonal-wise in board
+                for i in 0...2
+                {
+                    if board[rule[i]].isEmpty
+                    {
+                        let index = rule[i]
+                        boxes[index].setTitle("O", for: .normal)
+                        board[index] = "O"
+                        return
+                    }
+                }
+            }
+        }
+       //Draw scenario move for computer to place in final box
+        for box in 0...boxes.count
+        {
+            let index = board[box]
+            
+            if index == ""
+            {
+                boxes[box].setTitle("O", for: .normal)
+                board[box] = "O"
+                return
+            }
         }
     }
+    
     
     //Winning logic function
     func winners()
@@ -255,9 +258,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
             
            // print("Player position values   : \(playerAt0)-\(playerAt1)-\(playerAt2)")
             
-            if playerAt0 == playerAt1 &&
-               playerAt1 == playerAt2 &&
-               !playerAt0.isEmpty
+            if playerAt0 == playerAt1 && playerAt1 == playerAt2 && !playerAt0.isEmpty
             {
              //  print("Winner inside winners function is: \(playerAt0)")
                 winPlayer = playerAt0
@@ -296,6 +297,61 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
        
     }
     
+    //Reset board after playing game
+    func resetBoard()
+    {
+        board.removeAll()
+        loadBoard()
+        winFound = false
+        for button in boxes{
+            button.setTitle(nil, for: .normal)
+        }
+        if gameComputerMode == false
+        {
+        currentPlayer = ""
+        }
+        if gameComputerMode == true
+        {
+            currentPlayer = computerSymbol
+            playComputerMode()
+            currentPlayer = playerSymbol
+        }
+    }
+    
+    
+    //Change symbolselect label text and animation to visible and blink
+    func makeLabelInvincible(msg:String)
+    {
+        self.selectSymbolLabel.text = msg
+        self.selectSymbolLabel.isHidden = false
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: [.curveEaseInOut,.autoreverse,.repeat], animations: {self.selectSymbolLabel.alpha = 0.0},completion: stopBlink(finished:))
+    }
+    
+    //Make symbol select label animation stop and invisible
+    func stopBlink(finished:Bool){
+        self.selectSymbolLabel.layer.removeAllAnimations()
+        self.selectSymbolLabel.alpha = 1
+        self.selectSymbolLabel.isHidden = true
+    }
+    
+    //Change background color of symbol 'O' blue if X's turn
+    func changeOImgColor()
+    {
+      //  print("Inside change O background color")
+        playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
+        playerXImageView.layer.backgroundColor = myColor.cgColor
+    }
+    
+    //Change background color of symbol 'X' blue if O's turn
+    func changeXImgColor()
+    {
+        //print("Inside chage X background color")
+        playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
+        playerOImageView.layer.backgroundColor = myColor.cgColor
+    }
+    
+    
+    
     func showAlert(msg:String){
        // let alert = UIAlertController(title: "Success", message: msg, preferredStyle: .alert)
         let alert = UIAlertController(title: "Success", message: msg, preferredStyle: .actionSheet)
@@ -323,32 +379,12 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
               item: alert.view!, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute:
               NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 300)
            alert.view.addConstraint(constraintWidth)
-        //print(alert.message = "Player WON : " + winPlayer)
-        //alert.message = "Player WON : " + winPlayer
+        //Add Ok action & display alert
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
     
-    //Reset board after playing game
-    func resetBoard()
-    {
-        board.removeAll()
-        loadBoard()
-        winFound = false
-        for button in boxes{
-            button.setTitle(nil, for: .normal)
-        }
-        if gameComputerMode == false
-        {
-        currentPlayer = ""
-        }
-        if gameComputerMode == true
-        {
-            currentPlayer = computerSymbol
-            playComputerMode()
-            currentPlayer = playerSymbol
-        }
-    }
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
@@ -383,97 +419,6 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         stopBlink(finished: true)
         playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
         playerOImageView.layer.backgroundColor = myColor.cgColor
-    }
-    
-    
-    func playComputerMode(){
-        
-       // print("Inside playComputerMove function")
-        let randNum = Int.random(in:0...8)
-      //  print("Random Number: \(randNum)")
-        
-        let index = randNum
-        board[index] = "O"
-        boxes[index].setTitle("O",for: .normal)
-        currentPlayer = playerSymbol
-    }
-    
-    func predictMove()
-    {
-      //  print("Inside predictMove function")
-        playerXImageView.layer.backgroundColor = myColor.cgColor
-        playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
-        for rule in winRules
-        {
-            let playerAt0 = board[rule[0]]
-            let playerAt1 = board[rule[1]]
-            let playerAt2 = board[rule[2]]
-            
-            print("Player position values   : \(playerAt0)-\(playerAt1)-\(playerAt2)")
-            
-            print("current player : \(currentPlayer)")
-            if playerAt0 == playerAt1 || playerAt1 == playerAt2 || playerAt0 == playerAt2
-            {
-                if board[rule[0]].isEmpty && currentPlayer == computerSymbol
-                {
-                    /************************************************************************/
-                   // print("board[rule[0]] value : \(board[rule[0]])")
-                   // print("rule[0] value : \(rule[0])")
-                    //print("current player : \(currentPlayer)")
-                    /************************************************************************/
-                    
-                    let index = rule[0]
-                    boxes[index].setTitle("O", for: .normal)
-                    board[index] = "O"
-                    //currentPlayer = playerSymbol
-                    return
-                }
-                
-                if board[rule[1]].isEmpty && currentPlayer == computerSymbol
-                {
-                    /************************************************************************/
-                  //  print("board[rule[1]] value : \(board[rule[1]])")
-                   // print("rule[1] value : \(rule[1])")
-                    //print("current player : \(currentPlayer)")
-                    /************************************************************************/
-                    
-                    let index = rule[1]
-                    boxes[index].setTitle("O", for: .normal)
-                    board[index] = "O"
-                    //currentPlayer = playerSymbol
-                    return
-                }
-                
-                if board[rule[2]].isEmpty && currentPlayer == computerSymbol
-                {
-                    /************************************************************************/
-                    print("board[rule[2]] value : \(board[rule[2]])")
-                   // print("rule[2] value : \(rule[2])")
-                   // print("current player : \(currentPlayer)")
-                    /************************************************************************/
-                    
-                    let index = rule[2]
-                    boxes[index].setTitle("O", for: .normal)
-                    board[index] = "O"
-                    //currentPlayer = playerSymbol
-                    return
-                }
-            }
-            
-            
-        }
-        print("Draw Scenario")
-        for box in 0...boxes.count
-        {
-            let index = board[box]
-            
-            if index == ""
-            {
-                boxes[box].setTitle("O", for: .normal)
-                board[box] = "O"
-                return
-            }
-        }
     }
     
 }
