@@ -16,7 +16,6 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
     var currentPlayer : String?
     var playerXScore = 0
     var playerOScore = 0
-    //var winPlayer  = ""
     var winPlayer : String?
     var winFound = false
     let myColor : UIColor = UIColor.blue
@@ -28,7 +27,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
     @IBOutlet weak var scoreXLabel: UILabel!
     @IBOutlet weak var selectSymbolLabel: UILabel!
     
-    //2D array of  subarrays
+    //2D array of arrays
     var winRules = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
     
     //Assign Computer Mode Symbols
@@ -244,6 +243,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
             }
         }
     }
+    
     
     
     //Winning logic function
