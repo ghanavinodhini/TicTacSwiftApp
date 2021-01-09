@@ -167,7 +167,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
                     changeOImgColor()
         default : playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
                     playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
-                    makeLabelInvincible(msg:"Tap Symbol to select Player")
+                    makeLabelInvincible(msg:"👇 Tap Symbol to select Player 👇")
         }
         //Check for winners
              winners()
