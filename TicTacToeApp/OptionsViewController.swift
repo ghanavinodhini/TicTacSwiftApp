@@ -50,15 +50,16 @@ class OptionsViewController: ViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
          if segue.identifier == seagueToGameVC {
             
-            let destinationVC = segue.destination as? GameViewController
+            if let destinationVC = segue.destination as? GameViewController{
             
             if playersModeGameBtn == true{
-                destinationVC?.gameComputerMode = false
+                destinationVC.gameComputerMode = false
             }
             
             if playersModeGameBtn == false{
-                destinationVC?.gameComputerMode = true
+                destinationVC.gameComputerMode = true
             }
+         }
          }
     }
     

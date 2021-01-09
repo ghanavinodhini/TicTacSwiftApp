@@ -183,7 +183,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
     func callComputerToPlay()
     {
         predictMove()
-        print("After calling predictMove in callComputerToPlay")
+        //print("After calling predictMove in callComputerToPlay")
          winners()
         currentPlayer  = playerSymbol
         
