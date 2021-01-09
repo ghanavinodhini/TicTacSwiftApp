@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         
         //Create gradient background
         let newGradientLayer = CAGradientLayer()
-        newGradientLayer.colors = [UIColor.white.cgColor,UIColor.cyan.cgColor]
+        newGradientLayer.colors = [UIColor.white.cgColor,UIColor.systemOrange.cgColor]
         //Use same main view's frame to this layer's name
         newGradientLayer.frame = view.frame
         //Insert created layer to the back of existing layer give '0'
