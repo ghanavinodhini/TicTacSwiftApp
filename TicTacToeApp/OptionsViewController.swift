@@ -15,9 +15,7 @@ class OptionsViewController: ViewController {
     var playersModeGameBtn = false
    
     @IBOutlet weak var selectGridOptBtn: UIButton!
-    
     @IBOutlet weak var computerGameOptBtn: UIButton!
-    
     @IBOutlet weak var quitBtn: UIButton!
     
     
@@ -27,7 +25,7 @@ class OptionsViewController: ViewController {
         title = "Three-In-Row"
         
         quitBtn.layer.cornerRadius = 20.0
-        // Do any additional setup after loading the view.
+       
     }
     
     
@@ -50,7 +48,7 @@ class OptionsViewController: ViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
          if segue.identifier == seagueToGameVC {
             
-            //unwrap segue destinationVC to avoid app crash it returns nil
+            //unwrap segue destinationVC to avoid app crash if it returns nil
             if let destinationVC = segue.destination as? GameViewController{
             
             if playersModeGameBtn == true{
