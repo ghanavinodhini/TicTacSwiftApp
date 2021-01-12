@@ -23,7 +23,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNH-wd-Xvk">
-                                <rect key="frame" x="56" y="367" width="338" height="76"/>
+                                <rect key="frame" x="38" y="366" width="338" height="76"/>
                                 <color key="backgroundColor" red="1" green="0.6114232651" blue="0.84468955830000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Kefa-Regular" family="Kefa" pointSize="40"/>
                                 <state key="normal" title="Player &amp; Player">
@@ -35,7 +35,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Kv-hQ-b3A">
-                                <rect key="frame" x="56" y="489" width="338" height="76"/>
+                                <rect key="frame" x="38" y="488" width="338" height="76"/>
                                 <color key="backgroundColor" red="1" green="0.6114232651" blue="0.84468955830000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="76" id="x1U-df-wXK"/>
@@ -49,7 +49,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L48-mC-UNj">
-                                <rect key="frame" x="68" y="650" width="314" height="48"/>
+                                <rect key="frame" x="50" y="652" width="314" height="48"/>
                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="QUIT">
@@ -65,16 +65,16 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="GNH-wd-Xvk" firstAttribute="trailing" secondItem="9Kv-hQ-b3A" secondAttribute="trailing" id="92X-gs-oVq"/>
-                            <constraint firstItem="L48-mC-UNj" firstAttribute="leading" secondItem="Pxa-By-1uO" secondAttribute="leading" constant="68" id="IPg-DT-ORY"/>
+                            <constraint firstItem="L48-mC-UNj" firstAttribute="leading" secondItem="Pxa-By-1uO" secondAttribute="leading" constant="50" id="IPg-DT-ORY"/>
                             <constraint firstItem="9Kv-hQ-b3A" firstAttribute="top" secondItem="GNH-wd-Xvk" secondAttribute="bottom" constant="46" id="IfY-bn-Fps"/>
-                            <constraint firstItem="9Kv-hQ-b3A" firstAttribute="trailing" secondItem="QaM-PX-aP8" secondAttribute="trailingMargin" id="NnZ-O3-XMM"/>
-                            <constraint firstItem="Pxa-By-1uO" firstAttribute="bottom" secondItem="9Kv-hQ-b3A" secondAttribute="bottom" constant="297" id="Op0-Ez-Rm3"/>
-                            <constraint firstItem="L48-mC-UNj" firstAttribute="top" secondItem="9Kv-hQ-b3A" secondAttribute="bottom" constant="85" id="SfO-E4-IHB"/>
+                            <constraint firstItem="9Kv-hQ-b3A" firstAttribute="trailing" secondItem="QaM-PX-aP8" secondAttribute="trailingMargin" constant="-18" id="NnZ-O3-XMM"/>
+                            <constraint firstItem="Pxa-By-1uO" firstAttribute="bottom" secondItem="9Kv-hQ-b3A" secondAttribute="bottom" constant="298" id="Op0-Ez-Rm3"/>
+                            <constraint firstItem="L48-mC-UNj" firstAttribute="top" secondItem="9Kv-hQ-b3A" secondAttribute="bottom" constant="88" id="SfO-E4-IHB"/>
                             <constraint firstItem="hpc-Ps-kGC" firstAttribute="centerX" secondItem="QaM-PX-aP8" secondAttribute="centerX" id="T2L-wN-0Hg"/>
-                            <constraint firstItem="GNH-wd-Xvk" firstAttribute="top" secondItem="hpc-Ps-kGC" secondAttribute="bottom" constant="75" id="bMT-OU-6ed"/>
+                            <constraint firstItem="GNH-wd-Xvk" firstAttribute="top" secondItem="hpc-Ps-kGC" secondAttribute="bottom" constant="74" id="bMT-OU-6ed"/>
                             <constraint firstItem="GNH-wd-Xvk" firstAttribute="leading" secondItem="9Kv-hQ-b3A" secondAttribute="leading" id="lRJ-rT-vBH"/>
                             <constraint firstItem="Pxa-By-1uO" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="L48-mC-UNj" secondAttribute="trailing" id="nQF-YD-k9g"/>
-                            <constraint firstItem="L48-mC-UNj" firstAttribute="centerX" secondItem="QaM-PX-aP8" secondAttribute="centerX" constant="18" id="qtf-k4-erm"/>
+                            <constraint firstItem="L48-mC-UNj" firstAttribute="centerX" secondItem="QaM-PX-aP8" secondAttribute="centerX" id="qtf-k4-erm"/>
                             <constraint firstItem="hpc-Ps-kGC" firstAttribute="top" secondItem="Pxa-By-1uO" secondAttribute="top" constant="150" id="rhP-XR-c6B"/>
                         </constraints>
                     </view>
@@ -352,8 +352,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tic-Tac-Toe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1HU-zo-toH">
-                                <rect key="frame" x="102.5" y="194" width="209" height="54.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Three-In-Row" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1HU-zo-toH">
+                                <rect key="frame" x="66" y="194" width="282" height="54.5"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="50"/>
                                 <color key="textColor" systemColor="systemPurpleColor"/>
                                 <nil key="highlightedColor"/>

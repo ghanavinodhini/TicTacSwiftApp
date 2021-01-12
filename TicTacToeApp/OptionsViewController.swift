@@ -24,7 +24,7 @@ class OptionsViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Tic-Tac-Toe"
+        title = "Three-In-Row"
         
         quitBtn.layer.cornerRadius = 20.0
         // Do any additional setup after loading the view.
@@ -50,6 +50,7 @@ class OptionsViewController: ViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
          if segue.identifier == seagueToGameVC {
             
+            //unwrap segue destinationVC to avoid app crash it returns nil
             if let destinationVC = segue.destination as? GameViewController{
             
             if playersModeGameBtn == true{
