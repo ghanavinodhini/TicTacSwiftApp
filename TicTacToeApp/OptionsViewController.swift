@@ -48,7 +48,7 @@ class OptionsViewController: ViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
          if segue.identifier == seagueToGameVC {
             
-            //unwrap segue destinationVC to avoid app crash if it returns nil
+            //unwrap segue destinationVC to avoid app crash if destination returns nil
             if let destinationVC = segue.destination as? GameViewController{
             
             if playersModeGameBtn == true{

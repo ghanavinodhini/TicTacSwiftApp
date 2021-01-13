@@ -35,23 +35,17 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
     var gameComputerMode : Bool = false
     let playerSymbol = "X"
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         //Initialise score,textfields,animation label
         setObjectsInitialisation()
-        
         //Initialise tap gestures for symbol imageviews
         symbolTapInitialise()
-        
-        
         //Load board initially
         loadBoard()
-       
-    
-        //Call computerMode function if game with computer
+        
+        //Call computerMode function if game is with computer
         if(gameComputerMode == true)
         {
             playerOImageView.isUserInteractionEnabled = false
@@ -80,17 +74,17 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         //Initialise score and player textfields
         scoreOLabel.text = "Score : \(playerOScore)"
         scoreXLabel.text = "Score : \(playerXScore)"
-        playerXTxtField.text = nil
-        playerOTxtField.text = nil
+        playerXTxtField.text = ""
+        playerOTxtField.text = ""
     }
     
+    //Add tap gesture recogniser for 2 symbol image views
     func symbolTapInitialise()
     {
-        //Add tap gesture recogniser for 2 symbol image views
-        let tap1 = UITapGestureRecognizer(target: self, action: #selector(chooseXPlayer))     /**(chooseXPlayer(sender:) previously*/
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(chooseXPlayer))
         playerXImageView.addGestureRecognizer(tap1)
        
-        let tap2 = UITapGestureRecognizer(target: self, action: #selector(chooseOPlayer))  /**(chooseOPlayer(sender:) previously*/
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(chooseOPlayer))
         playerOImageView.addGestureRecognizer(tap2)
     }
     
@@ -106,27 +100,21 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
     {
         if gameComputerMode == true && currentPlayer == computerSymbol
         {
-                                                                            //print("Inside boxPressed if conditon of gameComputerMode true")
             changeOImgColor()
             callComputerToPlay()
             return
         }
-        
-        
     //Check if player names are entered in textfields
         let playerTxtBool = validatePlayerTxtFields()
-        
     //Get index of the button clicked
         if playerTxtBool == true
         {
          let index = boxes.firstIndex(of:sender)!
-        
     //to avoid allowing user to change symbol inside box after one turn.
         if !board[index].isEmpty
         {
             return
         }
-        
         callHumanToPlay(sender,index)
         }
     }
@@ -151,6 +139,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         currentPlayer = nextSymbol
     }
     
+    //Placing Human Move in board,identify winners,calls computerplay(if game with computer)
     func callHumanToPlay(_ sender:UIButton, _ index:Int) {
         //Check if clicked button value is 'X'(for human)
         switch currentPlayer
@@ -166,7 +155,6 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         
         //Check for winners
              winners()
-        
         //Call computerPlay if game mode is with computer
         if gameComputerMode == true && winFound == false
         {
@@ -182,19 +170,18 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         currentPlayer  = playerSymbol
         
     }
-    
+    //To place computer move for 1st time
     func playComputerMode()
     {
-       
+       //Get random number for computer
         let randNum = Int.random(in:0...8)
-                                                                                                //  print("Random Number: \(randNum)")
-        
         let index = randNum
         board[index] = "O"
         boxes[index].setTitle("O",for: .normal)
         currentPlayer = playerSymbol
     }
     
+    //Placing Computer move in board
     func predictMove()
     {
         playerXImageView.layer.backgroundColor = myColor.cgColor
@@ -205,9 +192,8 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
             let playerAt1 = board[rule[1]]
             let playerAt2 = board[rule[2]]
             
-            print("Player position values   : \(playerAt0)-\(playerAt1)-\(playerAt2)")
+            //print("Player position values   : \(playerAt0)-\(playerAt1)-\(playerAt2)")
             
-                                                                                                //print("current player : \(currentPlayer)")
             if playerAt0 == playerAt1 || playerAt1 == playerAt2 || playerAt0 == playerAt2
             {
                 //looping through 3 index values row-wise, column.wise, diagonal-wise in board
@@ -237,8 +223,6 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         }
     }
     
-    
-    
     //Winning logic function
     func winners()
     {
@@ -251,20 +235,24 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
             
             if playerAt0 == playerAt1 && playerAt1 == playerAt2 && !playerAt0.isEmpty
             {
-                                                                                    //  print("Winner inside winners function is: \(playerAt0)")
+                //Assign winner at position array rule[0] as winner if values at all 3 indexes are same
                 winPlayer = playerAt0
                
-                if winPlayer == "X"{
+                if winPlayer == "X"
+                {
+                    //increment X score if X wins
                     playerXScore += 1
-                                                                                    //  print("player X score: \(playerXScore)")
                     scoreXLabel.text = "Score : \(playerXScore)"
+                    //If playerXtextfield value is nil default value 'PlayerX' will be assigned
                     winMsg = "\(playerXTxtField.text ?? "Player X") WON"
                    
                 }
-                if winPlayer == "O"{
+                if winPlayer == "O"
+                {
+                    //increment O score if O wins
                     playerOScore += 1
-                                                                                    // print("player O score : \(playerOScore)")
                     scoreOLabel.text = "Score : \(playerOScore)"
+                    //If playerOtextfield value is nil default value 'PlayerO' will be assigned
                     winMsg = "\(playerOTxtField.text ?? "Player O") WON"
                    
                 }
@@ -285,7 +273,6 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
             playerOImageView.layer.backgroundColor = myDefaultColor.cgColor
             return
         }
-       
     }
     
     //Reset board after playing game
@@ -308,7 +295,6 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
             currentPlayer = playerSymbol
         }
     }
-    
     
     //Change symbolselect label text and animation to visible and blink
     func makeLabelInvincible(msg:String)
@@ -339,8 +325,6 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         playerOImageView.layer.backgroundColor = myColor.cgColor
     }
     
-    
-    
     func showAlert(msg:String){
        // let alert = UIAlertController(title: "Success", message: msg, preferredStyle: .alert)
         let alert = UIAlertController(title: "Success", message: msg, preferredStyle: .actionSheet)
@@ -355,7 +339,6 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         let imgViewTitle = UIImageView(frame: CGRect(x: 80, y: 70, width: 150, height: 150))
         imgViewTitle.image = imgTitle
         alert.view.addSubview(imgViewTitle)
-        
         
         // height constraint of Alert window
            let constraintHeight = NSLayoutConstraint(
@@ -373,8 +356,7 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         present(alert, animated: true, completion: nil)
     }
     
-    
-    
+    //Function to dismiss keyboard after entering text
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
         //self.view.endEditing(true)
@@ -388,17 +370,14 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         if self.playerXTxtField.text != "" || self.playerOTxtField.text != ""
             {
                 stopBlink(finished: true)
-                
             }
     }
-    
     
     @IBAction func chooseXPlayer(_ sender: UITapGestureRecognizer) {
         currentPlayer = "X"
         stopBlink(finished: true)
         playerXImageView.layer.backgroundColor = myColor.cgColor
         playerOImageView.layer.backgroundColor =  myDefaultColor.cgColor
-        
     }
     
     @IBAction func chooseOPlayer(_ sender: UITapGestureRecognizer) {
@@ -407,5 +386,4 @@ class GameViewController: ViewController,UITextFieldDelegate,UIGestureRecognizer
         playerXImageView.layer.backgroundColor = myDefaultColor.cgColor
         playerOImageView.layer.backgroundColor = myColor.cgColor
     }
-    
 }
